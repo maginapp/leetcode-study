@@ -1,0 +1,47 @@
+{
+  "name": "leetcode-study",
+  "version": "1.0.0",
+  "description": "leetcode-study",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "webpack-dev-server",
+    "build": "babel src -d lib",
+    "build:tsc": "tsc --allowJs --outDir tsc",
+    "build:tsc-es6": "babel tsc -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maginapp/leetcode-study.git"
+  },
+  "keywords": [
+    "leetcode",
+    "algorithm"
+  ],
+  "author": "maginapp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maginapp/leetcode-study/issues"
+  },
+  "homepage": "https://github.com/maginapp/leetcode-study#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-typescript": "^7.10.1",
+    "@types/jest": "^26.0.3",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.1.0",
+    "eslint": "^7.3.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(j|t)sx?$": "babel-jest"
+    }
+  }
+}
