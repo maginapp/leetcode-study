@@ -29,6 +29,7 @@ module.exports = {
         allowIndirect: true
       }
     ],
+    'one-var': 0,
     'vue/no-v-html': 'off',
     'comma-dangle': [
       'warn',
