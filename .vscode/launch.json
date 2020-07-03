@@ -16,7 +16,7 @@
       "request": "launch",
       "name": "Launch Program file -r esm",
       "program": "${file}",
-      "args": ["-r","esm"]
+      "runtimeArgs": ["-r","esm"]
     },
     {
       "type": "node",
