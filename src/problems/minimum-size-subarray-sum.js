@@ -12,43 +12,44 @@
 如果你已经完成了O(n) 时间复杂度的解法, 请尝试 O(n log n) 时间复杂度的解法。
 */
 
+/**
+ * @param {number} s
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minSubArrayLen = function (s, nums) {
+  let arr = [],
+    min = Infinity,
+    count = 0
+  for (let i = 0; i < nums.length; i++) {
+    arr.push(nums[i])
+    count += nums[i]
+    while (count >= s) {
+      min = Math.min(arr.length, min)
+      count -= arr.shift()
+    }
+  }
+  return min === Infinity ? 0 : min
+}
 
 /**
  * @param {number} s
  * @param {number[]} nums
  * @return {number}
  */
-var minSubArrayLen = function(s, nums) {
-    let arr = [], min = Infinity, count = 0
-    for (let i = 0; i < nums.length; i++) {
-        arr.push(nums[i])
-        count += nums[i]
-        while (count >= s) {
-            min = Math.min(arr.length, min)
-            count -= arr.shift()
-        }
+var minSubArrayLen = function (s, nums) {
+  let start = 0,
+    min = 0,
+    count = 0
+  for (let i = 0; i < nums.length; i++) {
+    count += nums[i]
+    while (count >= s) {
+      min = min === 0 ? i - start + 1 : Math.min(i - start + 1, min)
+      count -= nums[start]
+      start++
     }
-    return min === Infinity ? 0 : min
-};
-
-
-/**
- * @param {number} s
- * @param {number[]} nums
- * @return {number}
- */
-var minSubArrayLen = function(s, nums) {
-    let start = 0, min = 0, count = 0
-    for (let i = 0; i < nums.length; i++) {
-        count += nums[i]
-        while (count >= s) {
-            min = min === 0 ? i - start + 1 : Math.min(i - start + 1, min)
-            count -= nums[start]
-            start++
-        }
-    }
-    return min
-};
-
+  }
+  return min
+}
 
 export default minSubArrayLen

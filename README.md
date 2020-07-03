@@ -5,3 +5,9 @@
 ## 待解决问题
 
 * 使用staadard后，jest测试文件报语法错误
+
+* build后打包
+
+* 同样vscode调试配置
+
+* esm node `npm i esm -D`

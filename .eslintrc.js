@@ -16,7 +16,7 @@ module.exports = {
     jest: true
   },
   // add your custom rules here
-  ignorePatterns: ['lib/', 'tsc/'],
+  ignorePatterns: ['lib/', 'tsc/', 'src/**/*.test.js', 'src/**/*.spec.js'],
   rules: {
     'prettier/prettier': 'error',
     'nuxt/no-cjs-in-config': 'off',

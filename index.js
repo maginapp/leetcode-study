@@ -1,1 +1,1 @@
-import './code/data_struture/walls-and-gates.test'
+if (document && document.body) document.body.innerHTML = 'Hello'

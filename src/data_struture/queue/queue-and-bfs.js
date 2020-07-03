@@ -35,8 +35,6 @@ export var numIslandsDfs = function (grid) {
   if (!grid || !grid.length || !grid[0].length) return
   const rowL = grid.length
   const colL = grid[0].length
-  const island = []
-  let items = []
   let count = 0
 
   const director = [
@@ -77,7 +75,6 @@ export var numIslands = function (grid) {
   if (!grid || !grid.length || !grid[0].length) return
   const rowL = grid.length
   const colL = grid[0].length
-  let items = {}
   let count = 0
 
   const director = [
