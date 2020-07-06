@@ -8,7 +8,9 @@
     "start": "webpack-dev-server",
     "build": "babel src -d lib",
     "build:tsc": "tsc --allowJs --outDir tsc",
-    "build:tsc-es6": "babel tsc -d lib"
+    "build:tsc-es6": "babel tsc -d lib",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx.vue  --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js,.jsx,.ts,.tsx.vue --ignore-path .gitignore ."
   },
   "repository": {
     "type": "git",
@@ -36,7 +38,9 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "esm": "^3.2.25",
+    "husky": "^4.2.5",
     "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "standard": "^14.3.4",
     "webpack": "^4.43.0",
@@ -45,6 +49,14 @@
   "jest": {
     "transform": {
       "^.+\\.(j|t)sx?$": "babel-jest"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,vue}": "eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
   }
 }

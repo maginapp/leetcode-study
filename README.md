@@ -4,10 +4,15 @@
 
 ## 待解决问题
 
-* 使用staadard后，jest测试文件报语法错误
+* 使用standard后，jest测试文件报语法错误 / 完成
+
+  * 关闭standardJs 插件
 
 * build后打包
 
-* 同样vscode调试配置
 
-* esm node `npm i esm -D`
+* vscode调试配置  / 完成
+
+  * esm node `npm i esm -D`  / 完成
+
+  * .vscode/launch.json

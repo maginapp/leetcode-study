@@ -4,7 +4,7 @@
  * @param {string[]} wordList
  * @return {string[][]}
  */
-const findLadders = function(beginWord, endWord, wordList) {
+const findLadders = function (beginWord, endWord, wordList) {
   if (!wordList.includes(endWord)) return []
   const len = wordList.length
   const lenW = beginWord.length
