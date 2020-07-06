@@ -32,10 +32,11 @@
  * @return {number}
  */
 export var numIslandsDfs = function (grid) {
-  if (!grid || !grid.length || !grid[0].length) return
+  if (!grid || !grid.length || !grid[0].length) return 0
   const rowL = grid.length
   const colL = grid[0].length
   let count = 0
+  const items = []
 
   const director = [
     [0, -1],
@@ -46,10 +47,10 @@ export var numIslandsDfs = function (grid) {
 
   const dfs = (grid, i, j, items) => {
     if (items.includes(i + '-' + j)) return
-    if (grid[i][j] === 1) {
+    if (grid[i][j] == 1) {
       items.push(i + '-' + j)
     }
-    if (grid[i][j] === 0) return
+    if (grid[i][j] == 0) return
     let x, y
     for (let i1 = 0; i1 < director.length; i1++) {
       x = i + director[i1][0]
@@ -61,7 +62,7 @@ export var numIslandsDfs = function (grid) {
 
   for (let i = 0; i < rowL; i++) {
     for (let j = 0; j < colL; j++) {
-      if (grid[i][j] === 1 && !items.includes(i + '-' + j)) {
+      if (grid[i][j] == 1 && !items.includes(i + '-' + j)) {
         count++
         dfs(grid, i, j, items)
       }
@@ -72,7 +73,7 @@ export var numIslandsDfs = function (grid) {
 }
 
 export var numIslands = function (grid) {
-  if (!grid || !grid.length || !grid[0].length) return
+  if (!grid || !grid.length || !grid[0].length) return 0
   const rowL = grid.length
   const colL = grid[0].length
   let count = 0
@@ -84,7 +85,7 @@ export var numIslands = function (grid) {
     [-1, 0]
   ]
 
-  const bfs = (grid, items, arr) => {
+  const bfs = (grid, arr) => {
     let i, j, size
     while (arr.length) {
       let x, y
@@ -93,8 +94,8 @@ export var numIslands = function (grid) {
         i = arr[0][0]
         j = arr[0][1]
         arr.shift()
-        if (grid[i][j] === -1 || grid[i][j] === 0) continue
-        if (grid[i][j] === 1) {
+        if (grid[i][j] === -1 || grid[i][j] == 0) continue
+        if (grid[i][j] == 1) {
           grid[i][j] = -1
         }
         for (let i1 = 0; i1 < director.length; i1++) {
@@ -109,9 +110,9 @@ export var numIslands = function (grid) {
 
   for (let i = 0; i < rowL; i++) {
     for (let j = 0; j < colL; j++) {
-      if (grid[i][j] === 1) {
+      if (grid[i][j] == 1) {
         count++
-        bfs(grid, items, [[i, j]])
+        bfs(grid, [[i, j]])
       }
     }
   }
