@@ -274,7 +274,7 @@ export var openLock_success_2_300s = function (deadends, target) {
   return bfs(deadends, target, map)
 }
 
-export var openLock = (deadends, target) => {
+export var openLock_success_3_140s = (deadends, target) => {
   deadends = new Set(deadends)
   let headList = ['0000']
   let tailList = [target]
@@ -284,9 +284,10 @@ export var openLock = (deadends, target) => {
   let headStep = 0
   let tailStep = 0
   if (deadends.has('0000')) return -1
+  let hl, tl
   while (headList.length && tailList.length) {
-    let hl = headList.length
-    let tl = tailList.length
+    hl = headList.length
+    tl = tailList.length
     while (hl) {
       let str = headList.shift()
       if (tailList.includes(str)) {
@@ -331,6 +332,87 @@ export var openLock = (deadends, target) => {
   return -1
 }
 
+export var openLock_success_4_116_42_6 = (deadends, target) => {
+  deadends = new Set(deadends)
+  let headList = new Set(['0000'])
+  let tailList = new Set([target])
+  let l = target.length
+  let headStep = 0
+  let tailStep = 0
+  if (deadends.has('0000')) return -1
+  let set
+  while (headList.size && tailList.size) {
+    set = new Set()
+    for (let str of headList) {
+      if (tailList.has(str)) {
+        return tailStep + headStep
+      }
+      for (let i = 0; i < l; i++) {
+        let upstr = getNextStr(str, i, 1)
+        if (!deadends.has(upstr)) {
+          set.add(upstr)
+        }
+        let downstr = getNextStr(str, i, -1)
+        if (!deadends.has(downstr)) {
+          set.add(downstr)
+        }
+      }
+    }
+    headList = set
+    headStep++
+    set = new Set()
+    for (let str of tailList) {
+      if (headList.has(str)) {
+        return tailStep + headStep
+      }
+      for (let i = 0; i < l; i++) {
+        let upstr = getNextStr(str, i, 1)
+        if (!deadends.has(upstr)) {
+          set.add(upstr)
+        }
+        let downstr = getNextStr(str, i, -1)
+        if (!deadends.has(downstr)) {
+          set.add(downstr)
+        }
+      }
+    }
+    tailList = set
+    tailStep++
+  }
+  return -1
+}
+
+export var openLock = (deadends, target) => {
+  deadends = new Set(deadends)
+  let headList = new Set(['0000'])
+  let tailList = new Set([target])
+  let l = target.length
+  let headStep = 0
+  if (deadends.has('0000')) return -1
+  let set
+  while (headList.size && tailList.size) {
+    set = new Set()
+    for (let str of headList) {
+      if (tailList.has(str)) {
+        return headStep
+      }
+      for (let i = 0; i < l; i++) {
+        let upstr = getNextStr(str, i, 1)
+        if (!deadends.has(upstr)) {
+          set.add(upstr)
+        }
+        let downstr = getNextStr(str, i, -1)
+        if (!deadends.has(downstr)) {
+          set.add(downstr)
+        }
+      }
+    }
+    headList = tailList
+    tailList = set
+    headStep++
+  }
+  return -1
+}
 const getNextStr = (str, index, direction) => {
   const num = (+str[index] + 10 + direction) % 10
   return str.substr(0, index) + num + str.substr(index + 1)
