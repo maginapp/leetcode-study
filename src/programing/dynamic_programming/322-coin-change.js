@@ -69,20 +69,44 @@ export const coinChange_for = (coins, amount) => {
 }
 
 export const coinChange = (coins, amount) => {
-  const dp = new Array(amount + 1).fill([])
-  for (let i = 0; i < coins.length; i++) {
-    for (let j = coins[i]; j < amount; j++) {
-      if (dp[i].length > dp[i - coins[i]].length + 1) {
-        dp[i] = [...dp[i - coins[i]], coins[i]]
+  const dp = new Array(amount + 1).fill(Number.MAX_SAFE_INTEGER)
+  dp[0] = 0
+  for (let i = 1; i <= amount; i++) {
+    for (let j = 0; j < coins.length; j++) {
+      if (coins[j] <= i) {
+        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1)
       }
     }
   }
-  return dp[amount]
+  return dp[amount] == Number.MAX_SAFE_INTEGER ? -1 : dp[amount]
 }
 
-console.log(coinChange_for([1, 2, 5], 11))
-console.log(coinChange_for([1, 2, 5], 3))
-console.log(coinChange_for([6, 2, 5], 3))
-console.log(coinChange_for([6, 2, 5], 7))
-console.log(coinChange_for([6, 2, 5, 4], 7))
-console.log(coinChange_for([6, 4, 5, 2], 7))
+export const coinChange_dfs = (coins, amount) => {
+  let min = Number.MAX_SAFE_INTEGER
+
+  // 降序，剪枝判断出大符合邀请则结束
+  coins.sort((a, b) => b - a)
+
+  const dfs = (coins, amount, count) => {
+    if (amount < 0) return
+    for (let i = 0; i < coins.length; i++) {
+      if (amount % coins[i] == 0) {
+        min = Math.min(min, count + amount / coins[i])
+        return
+      } else {
+        dfs(coins, amount - coins[i], count + 1)
+      }
+    }
+  }
+
+  dfs(coins, amount, 0)
+
+  return min === Number.MAX_SAFE_INTEGER ? -1 : min
+}
+
+// console.log(coinChange_dfs([1, 2, 5], 11))
+// console.log(coinChange([1, 2, 5], 3))
+// console.log(coinChange([6, 2, 5], 3))
+// console.log(coinChange([6, 2, 5], 7))
+// console.log(coinChange([6, 2, 5, 4], 7))
+// console.log(coinChange([6, 4, 5, 2], 7))

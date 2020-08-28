@@ -163,3 +163,21 @@ export var findTargetSumWays_dp = function (nums, S) {
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 */
+
+const my_cut = (nums, i, res) => {
+  if (i === nums.length) {
+    return res === 0 ? 1 : 0
+  }
+  return my_cut(nums, i + 1, res + nums[i]) + my_cut(nums, i + 1, res - nums[i])
+}
+
+export const findTargetSumWays_self_dfs = (nums, S) => {
+  return my_cut(nums, 0, S)
+}
+
+export const findTargetSumWays_self_dfs_pre = (nums, S) => {
+  if (nums.filter(item => item % 2).length % 2 && S % 2 === 0) return 0
+  return my_cut(nums, 0, S)
+}
+
+export const findTargetSumWays_self_dp = (nums, S) => {}

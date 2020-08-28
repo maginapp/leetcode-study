@@ -1,6 +1,7 @@
 import {
   findTargetSumWays,
-  findTargetSumWays_dfs_promote,
+  findTargetSumWays_self_dfs,
+  findTargetSumWays_self_dfs_pre,
   findTargetSumWays_dfs,
   findTargetSumWays_dfs_yichu,
   findTargetSumWays_study_1,
@@ -88,9 +89,14 @@ describe('valid-parentheses', () => {
       expect(findTargetSumWays_dfs_yichu(...item)).toEqual(item[item.length - 1])
     })
   })
-  it('findTargetSumWays_dfs_promote', () => {
+  it('findTargetSumWays_self_dfs', () => {
     example.forEach(item => {
-      expect(findTargetSumWays_dfs_promote(...item)).toEqual(item[item.length - 1])
+      expect(findTargetSumWays_self_dfs(...item)).toEqual(item[item.length - 1])
+    })
+  })
+  it('findTargetSumWays_self_dfs_pre', () => {
+    example.forEach(item => {
+      expect(findTargetSumWays_self_dfs_pre(...item)).toEqual(item[item.length - 1])
     })
   })
 })
