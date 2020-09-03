@@ -69,6 +69,13 @@ MinStack.prototype.getMin = function () {
 }
 
 /**
+ * @return {number}
+ */
+MinStack.prototype.size = function () {
+  return this.stack.length
+}
+
+/**
  * Your MinStack object will be instantiated and called as such:
  * var obj = new MinStack()
  * obj.push(x)
