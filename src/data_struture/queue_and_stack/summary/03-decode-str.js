@@ -2,7 +2,8 @@
  * @param {string} s
  * @return {string}
  */
-export var decodeString = function (s) {
+// 只适合个位数
+export var decodeString_err = function (s) {
   let index = s.indexOf(']')
   while (index != -1) {
     let sinex = s.lastIndexOf('[', index)
@@ -11,6 +12,50 @@ export var decodeString = function (s) {
   }
   return s
 }
+
+export var decodeString = function (s) {
+  let index = s.indexOf(']')
+  while (index != -1) {
+    let sinex = s.lastIndexOf('[', index)
+    let k = '',
+      i = 0
+    while (+s[sinex - i - 1] >= 0) {
+      i++
+      k = '' + s[sinex - i] + k
+    }
+    s = s.substring(0, sinex - i) + s.substring(sinex + 1, index).repeat(k) + s.substring(index + 1)
+    index = s.indexOf(']')
+  }
+  return s
+}
+
+export var decodeString_dg = function (s) {}
+
+export var decodeString_for = function (s) {
+  let stack = [],
+    num = '',
+    str = ''
+  for (let i of s) {
+    if (i >= 0) {
+      num += i
+    } else if (i == '[') {
+      stack.push({
+        str,
+        num
+      })
+      str = ''
+      num = ''
+    } else if (i == ']') {
+      const data = stack.pop()
+      str = data.str + str.repeat(data.num)
+    } else {
+      str += i
+    }
+  }
+  return str
+}
+
+// console.log(decodeString('3[a]2[bc]'))
 
 /*
 字符串解码
