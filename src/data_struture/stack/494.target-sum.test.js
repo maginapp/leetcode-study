@@ -6,7 +6,9 @@ import {
   findTargetSumWays_dfs_yichu,
   findTargetSumWays_study_1,
   findTargetSumWays_chaoshi,
-  findTargetSumWays_study_2
+  findTargetSumWays_study_2,
+  findTargetSumWays_self_dp,
+  findTargetSumWays_self_dp_promoted
 } from './494.target-sum'
 
 /* eslint-disable */
@@ -97,6 +99,16 @@ describe('valid-parentheses', () => {
   it('findTargetSumWays_self_dfs_pre', () => {
     example.forEach(item => {
       expect(findTargetSumWays_self_dfs_pre(...item)).toEqual(item[item.length - 1])
+    })
+  })
+  it('findTargetSumWays_self_dp', () => {
+    example.forEach(item => {
+      expect(findTargetSumWays_self_dp(...item)).toEqual(item[item.length - 1])
+    })
+  })
+  it('findTargetSumWays_self_dp_promoted', () => {
+    example.forEach(item => {
+      expect(findTargetSumWays_self_dp_promoted(...item)).toEqual(item[item.length - 1])
     })
   })
 })

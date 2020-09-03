@@ -25,10 +25,6 @@ export var findTargetSumWays_chaoshi = function (nums, S) {
   return queue.filter(item => item === S).length
 }
 
-// console.log(findTargetSumWays([1, 1, 1, 1, 1], 3))
-// console.log(findTargetSumWays([1, 1, 1, 1, 1, 1, 1], 5))
-// console.log(findTargetSumWays([1, 4, 5, 3, 4, 3, 3, 2, 3], 16))
-
 /**
  * @param {number[]} nums
  * @param {number} S
@@ -59,24 +55,9 @@ export var findTargetSumWays_study_2 = function (nums, S) {
   }
   if (sum < S || (sum + S) % 2 === 1) return 0 // 累加和是奇数  只能得到奇数
   let target = (sum + S) / 2
-  /*
-  [1,1,1,1,1,1,1,1,1] 5 => (9 + 5) / 2 => target = 7
-  new Array(8).fill(0)
-  dp[0] = 1
-  遍历 target-- 到num
-  // 以上分析有问题 不适合动态思路
-
-  从尾部分析??
-  arr[n]
-  // 需要先学习动态规划 => 背包问题
-
-  */
   let dp = new Array(target + 1).fill(0)
   dp[0] = 1
-  // 遍历nums: nums[0] => nums[nums.length - 1] 递增
   for (let num of nums) {
-    // 遍历 [num, target]: target => num 递减
-    // target >= num才会执行for循环代码
     for (let i = target; i >= num; i--) {
       dp[i] += dp[i - num]
     }
@@ -180,4 +161,69 @@ export const findTargetSumWays_self_dfs_pre = (nums, S) => {
   return my_cut(nums, 0, S)
 }
 
-export const findTargetSumWays_self_dp = (nums, S) => {}
+// k[i] = k[i - 1][j] + k[i - 1][j - num[i]]
+export const findTargetSumWays_self_dp = (nums, S) => {
+  const sum = nums.reduce((pre, item) => pre + item)
+  if ((sum + S) % 2 == 1 || sum < S) return 0
+  // (sum - cut) = S => cut = sum - S  => cut: 需要减去的值，之前添加的数 * 2
+  // target = (sum - S) / 2 ==> 目标和
+  const target = (sum - S) / 2
+  const dp = new Array(nums.length).fill(0).map(() => new Array(target + 1).fill(0))
+  for (let i = 0; i < nums.length; i++) {
+    dp[i][0] = 1
+  }
+  if (nums[0] <= target) {
+    dp[0][nums[0]] += 1
+  }
+  for (let i = 1; i < nums.length; i++) {
+    for (let j = 0; j <= target; j++) {
+      if (nums[i] <= j) {
+        dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i]]
+      } else {
+        dp[i][j] = dp[i - 1][j]
+      }
+    }
+  }
+  return dp[nums.length - 1][target]
+}
+
+// k[i] = k[i] + k[i - nums[i]]
+// 错误原因  提升为一维时，从前到后会覆盖数据，需要从后向前
+export const findTargetSumWays_self_dp_promoted_err = (nums, S) => {
+  const sum = nums.reduce((pre, item) => pre + item)
+  if ((sum + S) % 2 == 1 || sum < S) return 0
+  const target = (sum - S) / 2
+  // (sum - cut) = S => cut = sum - S  => cut: 需要减去的值，之前添加的数 * 2
+  // target = (sum - S) / 2 ==> 目标和
+  const dp = new Array(target + 1).fill(0)
+  dp[0] = 1
+  for (let num of nums) {
+    for (let i = 1; i <= target; i++) {
+      if (num <= i) {
+        dp[i] += dp[i - num]
+      }
+    }
+  }
+  return dp[target]
+}
+
+export const findTargetSumWays_self_dp_promoted = (nums, S) => {
+  const sum = nums.reduce((pre, item) => pre + item)
+  if ((sum + S) % 2 == 1 || sum < S) return 0
+  const target = (sum - S) / 2
+  const dp = new Array(target + 1).fill(0)
+  dp[0] = 1
+  for (let num of nums) {
+    for (let i = target; i > 0; i--) {
+      if (num <= i) {
+        dp[i] += dp[i - num]
+      }
+    }
+  }
+  return dp[target]
+}
+
+// console.log(findTargetSumWays_self_dp_promoted([1, 1, 1, 1, 1, 1, 1], 3, 21))
+// console.log(findTargetSumWays_self_dp_promoted([1, 1, 1, 1, 1], 3))
+// console.log(findTargetSumWays([1, 1, 1, 1, 1, 1, 1], 5))
+// console.log(findTargetSumWays([1, 4, 5, 3, 4, 3, 3, 2, 3], 16))
