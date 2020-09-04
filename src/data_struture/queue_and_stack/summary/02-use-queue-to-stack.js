@@ -1,5 +1,3 @@
-import MyCircularQueue from '../queue/queue'
-
 /**
  * Initialize your data structure here.
  */
@@ -27,12 +25,12 @@ var MyStack = function () {
 MyStack.prototype.push = function (x) {
   let size = this.queue.size()
   let list = []
+  list.push(x)
   for (let i = 0; i < size; i++) {
     list.push(this.queue.pop())
   }
-  list.push(x)
   while (list.length) {
-    this.queue.push(list.pop())
+    this.queue.push(list.shift())
   }
 }
 
@@ -92,6 +90,9 @@ empty() -- 返回栈是否为空
 const s = new MyStack()
 s.push(1)
 s.push(2)
+s.push(3)
 s.top()
+s.pop()
+s.pop()
 s.pop()
 s.empty()
