@@ -5,7 +5,59 @@
  * @param {number} newColor
  * @return {number[][]}
  */
-var floodFill = function (image, sr, sc, newColor) {}
+export let floodFill_timeout = function (image, sr, sc, newColor) {
+  if (!image || !image.length || !image[0].length) return image
+  let rows = image.length
+  let columns = image[0].length
+  const steps = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0]
+  ]
+  const value = image[sr][sc]
+  const queue = [[sr, sc]]
+  while (queue.length) {
+    let color = queue.shift()
+    image[color[0]][color[1]] = newColor
+    steps.forEach(item => {
+      let x = color[0] + item[0]
+      let y = color[1] + item[1]
+      if (x < 0 || y < 0 || x >= rows || y >= columns) return
+      if (image[x][y] == value) queue.push([x, y])
+    })
+  }
+  return image
+}
+
+export let floodFill = function (image, sr, sc, newColor) {
+  if (!image || !image.length || !image[0].length) return image
+  const value = image[sr][sc]
+  if (value == newColor) return image
+  const queue = [[sr, sc]]
+  let rows = image.length
+  let columns = image[0].length
+  const steps = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0]
+  ]
+  image[sr][sc] = newColor
+  while (queue.length) {
+    let color = queue.shift()
+    steps.forEach(item => {
+      let x = color[0] + item[0]
+      let y = color[1] + item[1]
+      if (x < 0 || y < 0 || x >= rows || y >= columns) return
+      if (image[x][y] == value) {
+        image[x][y] = newColor
+        queue.push([x, y])
+      }
+    })
+  }
+  return image
+}
 
 /*
 有一幅以二维整数数组表示的图画，每一个整数表示该图画的像素值大小，数值在 0 到 65535 之间。
