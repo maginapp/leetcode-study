@@ -1,4 +1,4 @@
-import { createTreeNode } from './../../utils/tree'
+import { createTreeNode } from './../../../utils/tree'
 import { inorderTraversal, inorderTraversal_dfs } from './02-LDR'
 
 /* eslint-disable */

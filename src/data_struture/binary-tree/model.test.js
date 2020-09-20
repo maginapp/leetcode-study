@@ -1,4 +1,4 @@
-import { createTreeNode, TreeNode } from './../../utils/tree'
+import { createTreeNode, TreeNode } from './../../../utils/tree'
 import { myFunc } from './model'
 
 /* eslint-disable */

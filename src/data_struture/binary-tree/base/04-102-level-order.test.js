@@ -1,4 +1,4 @@
-import { createTreeNode } from './../../utils/tree'
+import { createTreeNode } from './../../../utils/tree'
 import { levelOrder } from './04-102-level-order'
 
 /* eslint-disable */

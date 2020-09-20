@@ -1,4 +1,4 @@
-import { createTreeNode } from './../../utils/tree'
+import { createTreeNode } from './../../../utils/tree'
 import { postorderTraversal_stack, postorderTraversal_dfs } from './03-LRD'
 
 /* eslint-disable */

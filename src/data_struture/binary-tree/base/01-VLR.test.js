@@ -1,5 +1,5 @@
 import { preorderTraversal } from './01-VLR'
-import { createTreeNode } from './../../utils/tree'
+import { createTreeNode } from './../../../utils/tree'
 
 /* eslint-disable */
 const example = [

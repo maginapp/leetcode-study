@@ -12,4 +12,10 @@ describe('model test', () => {
       expect(myFunc(...item[0])).toBe(item[1])
     })
   })
+  example.forEach((item, index) => {
+    it(`expect-myFunc${index}`, () => {
+      expect(myFunc(...item[0])).toEqual(item[1])
+      expect(myFunc(...item[0])).toBe(item[1])
+    })
+  })
 })
